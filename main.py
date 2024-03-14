@@ -51,29 +51,24 @@ class NeuralNetwork:
             self.weights_hidden_output += np.dot(hidden_outputs.T, output_delta) * learning_rate
             self.weights_input_hidden += np.dot(inputs.T, hidden_delta) * learning_rate
 
-# Örnek kullanım
 if __name__ == "__main__":
-    # Örnek giriş verileri ve hedef çıktılar
-    X = np.array([[0,0], [0,1], [1,0], [1,1]])
-    y = np.array([[0], [1], [1], [0]])
+    np.set_printoptions(suppress=True)
+    X = np.array([[0,0,0], [0,0,1], [0,1,0],[0,1,1],[1,0,0],[1,0,1],[1,1,0],[1,1,1]])
+    y = np.array([[0],[0],[0],[0],[0],[1],[0],[0]])
     
     # Yapay Sinir Ağı oluşturulması
-    neural_network = NeuralNetwork(input_size=2, hidden_size=8, output_size=1)
+    neural_network = NeuralNetwork(input_size=3, hidden_size=8, output_size=1)
     
     while True:
+
         # Ağın eğitilmesi
-        neural_network.train(inputs=X, targets=y, num_epochs=100000, learning_rate=0.1)
+        neural_network.train(inputs=X, targets=y, num_epochs=1000000, learning_rate=0.1)
+        for x in X:
+            test_input = np.array(x)
+            input_text = "".join(["X" if i else "O" for i in x])
+            print(input_text,neural_network.forward(test_input))
+
         
-        # Test
-        test_input = np.array([[0, 0]])
-        print("0  XOR  0 = ", neural_network.forward(test_input))
-        
-        test_input = np.array([[0, 1]])
-        print("0  XOR  1 = ", neural_network.forward(test_input))
-        
-        test_input = np.array([[1, 0]])
-        print("1  XOR  0 = ", neural_network.forward(test_input))
-        
-        test_input = np.array([[1, 1]])
-        print("1  XOR  1 = ", neural_network.forward(test_input))
         input("")
+        
+
