@@ -53,22 +53,22 @@ class NeuralNetwork:
 
 if __name__ == "__main__":
     np.set_printoptions(suppress=True)
+
     X = np.array([[0,0,0], [0,0,1], [0,1,0],[0,1,1],[1,0,0],[1,0,1],[1,1,0],[1,1,1]])
     y = np.array([[0],[0],[0],[0],[0],[1],[0],[0]])
     
-    # Yapay Sinir Ağı oluşturulması
-    neural_network = NeuralNetwork(input_size=3, hidden_size=8, output_size=1)
-    
-    while True:
+    neural_network = NeuralNetwork(input_size=9, hidden_size=9, output_size=9)
+    neural_network.train(inputs=X, targets=y, num_epochs=100000, learning_rate=0.1)
 
-        # Ağın eğitilmesi
-        neural_network.train(inputs=X, targets=y, num_epochs=1000000, learning_rate=0.1)
-        for x in X:
-            test_input = np.array(x)
-            input_text = "".join(["X" if i else "O" for i in x])
-            print(input_text,neural_network.forward(test_input))
+    # while True:
+
+    #     # Ağın eğitilmesi
+    #     for x in X:
+    #         test_input = np.array(x)
+    #         input_text = "".join(["X" if i else "O" for i in x])
+    #         print(input_text,neural_network.forward(test_input))
 
         
-        input("")
+    #     input("")
         
 
